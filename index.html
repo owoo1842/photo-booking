@@ -45,88 +45,98 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--in);border:1.5px
   <div class="hd">付費約拍 預約表單</div>
   <p class="tip">填完產生訊息，複製後私訊 IG 即可</p>
 
-  <label class="f" for="nick">👤 稱呼</label>
-  <input type="text" id="nick" placeholder="請輸入稱呼">
+  <form id="booking-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <input type="hidden" name="_subject" value="付費約拍預約">
+    <input type="hidden" name="message" id="final-message">
+    <input type="hidden" name="_replyto" id="replyto">
 
-  <label class="f" for="cp">📱 聯絡方式</label>
-  <select id="cp"><option>IG</option><option>Twitter（X）</option><option>微信</option></select>
-  <input type="text" id="ig" placeholder="請輸入帳號或 ID" style="margin-top:10px">
+    <label class="f" for="nick">👤 稱呼</label>
+    <input type="text" id="nick" name="稱呼" placeholder="請輸入稱呼">
 
-  <label class="f" for="type">👗 拍攝類型</label>
-  <select id="type">
-    <option value="1500">一般時裝（無露溝、露腿、露腰）</option>
-    <option value="2000">性感時裝</option>
-    <option value="3000">一般內衣／泳衣／比基尼（非丁字款）</option>
-    <option value="4000">性感內衣（馬甲、蕾絲、法式）</option>
-  </select>
-  <p class="h">拍攝時間 3 小時，價格為單人</p>
+    <label class="f" for="cp">📱 聯絡方式</label>
+    <select id="cp" name="聯絡方式"><option>IG</option><option>Twitter（X）</option><option>微信</option></select>
+    <input type="text" id="ig" name="聯絡帳號" placeholder="請輸入帳號或 ID" style="margin-top:10px">
 
-  <label class="f" for="date">📅 希望日期</label>
-  <input type="date" id="date">
-  <p class="h">若可配合對方檔期，南部約拍免車馬費</p>
+    <label class="f" for="type">👗 拍攝類型</label>
+    <select id="type" name="拍攝類型">
+      <option value="1500">一般時裝（無露溝、露腿、露腰）</option>
+      <option value="2000">性感時裝</option>
+      <option value="3000">一般內衣／泳衣／比基尼（非丁字款）</option>
+      <option value="4000">性感內衣（馬甲、蕾絲、法式）</option>
+    </select>
+    <p class="h">拍攝時間 3 小時，價格為單人</p>
 
-  <label class="f" for="time">🕑 希望時段</label>
-  <input type="text" id="time" placeholder="例如 下午 14:00 開始">
+    <label class="f" for="date">📅 希望日期</label>
+    <input type="date" id="date" name="希望日期">
+    <p class="h">若可配合對方檔期，南部約拍免車馬費</p>
 
-  <label class="f" for="area">📍 拍攝地區</label>
-  <select id="area">
-    <option>高雄</option>
-    <option>北部（車馬費實報實銷）</option>
-    <option>中部（車馬費實報實銷）</option>
-  </select>
+    <label class="f" for="time">🕑 希望時段</label>
+    <input type="text" id="time" name="希望時段" placeholder="例如 下午 14:00 開始">
 
-  <label class="f" for="place">🏠 預計拍攝場地</label>
-  <input type="text" id="place" placeholder="例如 攝影棚／戶外／咖啡廳">
+    <label class="f" for="area">📍 拍攝地區</label>
+    <select id="area" name="拍攝地區">
+      <option>高雄</option>
+      <option>北部（車馬費實報實銷）</option>
+      <option>中部（車馬費實報實銷）</option>
+    </select>
 
-  <label class="f" for="idea">🎨 主題與風格構想</label>
-  <textarea id="idea" placeholder="想拍的風格、服裝、參考方向"></textarea>
-  <p class="h">特別想拍的動作請先準備示意圖</p>
+    <label class="f" for="place">🏠 預計拍攝場地</label>
+    <input type="text" id="place" name="預計拍攝場地" placeholder="例如 攝影棚／戶外／咖啡廳">
 
-  <label class="f" for="first">🤝 是否初次合作</label>
-  <select id="first"><option>是，初次合作</option><option>否，合作過</option></select>
-  <p class="h">初次一對一合作不接受旅拍</p>
+    <label class="f" for="idea">🎨 主題與風格構想</label>
+    <textarea id="idea" name="主題與風格構想" placeholder="想拍的風格、服裝、參考方向"></textarea>
+    <p class="h">特別想拍的動作請先準備示意圖</p>
 
-  <label class="f" for="use">🖼️ 作品用途</label>
-  <select id="use"><option>個人收藏</option><option>社群發表</option><option>其他（備註說明）</option></select>
-  <p class="h">未經允許的作品不可上架電子寫真</p>
+    <label class="f" for="first">🤝 是否初次合作</label>
+    <select id="first" name="是否初次合作"><option>是，初次合作</option><option>否，合作過</option></select>
+    <p class="h">初次一對一合作不接受旅拍</p>
 
-  <label class="f" for="msg">✍️ 備註（選填）</label>
-  <input type="text" id="msg">
+    <label class="f" for="use">🖼️ 作品用途</label>
+    <select id="use" name="作品用途"><option>個人收藏</option><option>社群發表</option><option>其他（備註說明）</option></select>
+    <p class="h">未經允許的作品不可上架電子寫真</p>
 
-  <div class="total"><small>預估拍攝費用</small><strong id="sum">$1,500</strong><p id="sumn">單人、3 小時；不含車馬費</p></div>
+    <label class="f" for="msg">✍️ 備註（選填）</label>
+    <input type="text" id="msg" name="備註">
 
-  <div class="notes">
-    <h3>注意事項</h3>
-    <p>不接受情趣、裸拍；拍攝時不接受肢體碰觸、凹尺度。</p>
-    <p>拍攝都會攜伴，人頭費由模特方自行處理。</p>
-    <p>有付費的攝影才可參與拍攝（含手機）。</p>
-    <p>不可刻意拍特寫私密部位或走光角度。</p>
-    <p>天氣因素需更改時間地點，請提前 2 天告知。</p>
-  </div>
+    <div class="total"><small>預估拍攝費用</small><strong id="sum">$1,500</strong><p id="sumn">單人、3 小時；不含車馬費</p></div>
 
-  <details open>
-    <summary>📄 拍攝合約書（保障雙方）</summary>
-    <div class="ct">
-      <p>拍攝會簽訂合約書，內容如下：</p>
-      <p><b>第一條　拍攝範圍限制</b><br>攝影不得拍攝約定外之影像；若現場有臨時異動需求，須經雙方當場同意後方得進行。</p>
-      <p><b>第二條　照片交付優惠</b><br>攝影師於拍攝完成後 30 個工作天內完成照片／影片之挑選與交付，可享有 $500 元優惠。</p>
-      <p><b>第三條　後製與影像保護</b><br>除原片剪輯與修圖外，雙方皆不得使用其他後製軟體擅自更改內容成像（如使用 AI 換臉、變造，或作為其他非授權之不當用途）。</p>
-      <p><b>第四條　隱私與安全</b><br>雙方對於拍攝過程及內容均負有保密義務，不得任意流出未公開之毛片，以維護彼此隱私與聲譽。</p>
-      <p><b>第五條　違約處理</b><br>若任一方違反本合約之約定，守約方得請求違約方改善；若情節重大導致權益受損者，守約方得終止合約並依法請求相關損害賠償。</p>
+    <div class="notes">
+      <h3>注意事項</h3>
+      <p>不接受情趣、裸拍；拍攝時不接受肢體碰觸、凹尺度。</p>
+      <p>拍攝都會攜伴，人頭費由模特方自行處理。</p>
+      <p>有付費的攝影才可參與拍攝（含手機）。</p>
+      <p>不可刻意拍特寫私密部位或走光角度。</p>
+      <p>天氣因素需更改時間地點，請提前 2 天告知。</p>
     </div>
-  </details>
 
-  <label class="chk"><input type="checkbox" id="disc"><span>我會在拍攝後 30 個工作天內完成挑選與交付（享 $500 優惠）</span></label>
-  <p class="h" style="margin:6px 0 0 38px">※ 選填，可自行決定要不要勾選；不勾選就不享有優惠，也不影響預約。</p>
+    <details open>
+      <summary>📄 拍攝合約書（保障雙方）</summary>
+      <div class="ct">
+        <p>拍攝會簽訂合約書，內容如下：</p>
+        <p><b>第一條　拍攝範圍限制</b><br>攝影不得拍攝約定外之影像；若現場有臨時異動需求，須經雙方當場同意後方得進行。</p>
+        <p><b>第二條　照片交付優惠</b><br>攝影師於拍攝完成後 30 個工作天內完成照片／影片之挑選與交付，可享有 $500 元優惠。</p>
+        <p><b>第三條　後製與影像保護</b><br>除原片剪輯與修圖外，雙方皆不得使用其他後製軟體擅自更改內容成像（如使用 AI 換臉、變造，或作為其他非授權之不當用途）。</p>
+        <p><b>第四條　隱私與安全</b><br>雙方對於拍攝過程及內容均負有保密義務，不得任意流出未公開之毛片，以維護彼此隱私與聲譽。</p>
+        <p><b>第五條　違約處理</b><br>若任一方違反本合約之約定，守約方得請求違約方改善；若情節重大導致權益受損者，守約方得終止合約並依法請求相關損害賠償。</p>
+      </div>
+    </details>
 
-  <label class="chk"><input type="checkbox" class="ck"><span>我了解並同意以上注意事項與收費標準</span></label>
-  <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝期間尊重對方，不碰觸、不凹尺度</span></label>
-  <label class="chk"><input type="checkbox" class="ck"><span>我同意作品未經允許不上架電子寫真</span></label>
-  <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝當天簽訂合約書，並遵守以上條款</span></label>
+    <label class="chk"><input type="checkbox" id="disc"><span>我會在拍攝後 30 個工作天內完成挑選與交付（享 $500 優惠）</span></label>
+    <p class="h" style="margin:6px 0 0 38px">※ 選填，可自行決定要不要勾選；不勾選就不享有優惠，也不影響預約。</p>
 
-  <div id="err" role="alert"></div>
-  <button id="go" type="button">產生預約訊息</button>
-  <div id="out" hidden><pre id="txt"></pre><button id="copy" type="button">複製訊息</button></div>
+    <label class="chk"><input type="checkbox" class="ck"><span>我了解並同意以上注意事項與收費標準</span></label>
+    <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝期間尊重對方，不碰觸、不凹尺度</span></label>
+    <label class="chk"><input type="checkbox" class="ck"><span>我同意作品未經允許不上架電子寫真</span></label>
+    <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝當天簽訂合約書，並遵守以上條款</span></label>
+
+    <div id="err" role="alert"></div>
+    <button id="go" type="button">產生預約訊息</button>
+    <div id="out" hidden>
+      <pre id="txt"></pre>
+      <button id="send" type="submit">送出預約</button>
+      <button id="copy" type="button">複製訊息</button>
+    </div>
+  </form>
 </div>
 <script>
 var $=function(i){return $_(i)};function $_(i){return document.getElementById(i)}
@@ -134,24 +144,69 @@ function price(){return Math.max(0,(+$('type').value)-($('disc').checked?500:0))
 function upd(){$('sum').textContent='$'+price().toLocaleString()}
 $('type').addEventListener('change',upd);$('disc').addEventListener('change',upd);upd();
 function st(i){var o=$(i);return o.options[o.selectedIndex].text}
+function buildMessage(){
+  var v=function(i){return $(i).value.trim()||'—'};
+  return '【付費約拍預約】\n' +
+    '稱呼：'+v('nick')+'\n' +
+    '聯絡方式：'+st('cp')+' '+v('ig')+'\n\n' +
+    '拍攝類型：'+st('type')+'\n' +
+    '預估費用：$'+price().toLocaleString()+'（單人、3 小時'+($('disc').checked?'，含 30 工作天交付優惠 $500':'')+'）\n\n' +
+    '希望日期：'+v('date')+'\n' +
+    '希望時段：'+v('time')+'\n' +
+    '拍攝地區：'+st('area')+'\n' +
+    '預計場地：'+v('place')+'\n\n' +
+    '主題與風格：'+$('idea').value.trim()+'\n' +
+    '初次合作：'+st('first')+'\n' +
+    '作品用途：'+st('use')+'\n' +
+    '備註：'+v('msg')+'\n\n' +
+    '我已了解並同意注意事項與收費標準，並同意拍攝當天簽訂合約書。';
+}
 $('go').onclick=function(){
   var all=true;document.querySelectorAll('.ck').forEach(function(c){if(!c.checked)all=false});
   if(!$('idea').value.trim()){$('err').textContent='請填寫主題與風格構想。';return}
   if(!all){$('err').textContent='請勾選所有同意事項。';return}
   $('err').textContent='';
-  var v=function(i){return $(i).value.trim()||'—'};
-  var t='【付費約拍預約】\n稱呼：'+v('nick')+'\n聯絡方式：'+st('cp')+' '+v('ig')+'\n\n'+
-  '拍攝類型：'+st('type')+'\n預估費用：$'+price().toLocaleString()+'（單人、3 小時'+($('disc').checked?'，含 30 工作天交付優惠 $500':'')+'）\n\n'+
-  '希望日期：'+v('date')+'\n希望時段：'+v('time')+'\n拍攝地區：'+st('area')+'\n預計場地：'+v('place')+'\n\n'+
-  '主題與風格：'+$('idea').value.trim()+'\n初次合作：'+st('first')+'\n作品用途：'+st('use')+'\n備註：'+v('msg')+'\n\n'+
-  '我已了解並同意注意事項與收費標準，並同意拍攝當天簽訂合約書。';
-  $('txt').textContent=t;$('out').hidden=false;$('out').scrollIntoView({behavior:'smooth'});
+  var msg=buildMessage();
+  $('txt').textContent=msg;
+  $('final-message').value=msg;
+  $('replyto').value=$('ig').value.trim() || $('nick').value.trim() || 'noreply@example.com';
+  $('out').hidden=false;
+  $('out').scrollIntoView({behavior:'smooth'});
 };
 $('copy').onclick=function(){
   var t=$('txt').textContent;
   try{navigator.clipboard.writeText(t).then(function(){$('copy').textContent='已複製'},sel)}catch(e){sel()}
 };
 function sel(){var r=document.createRange();r.selectNodeContents($('txt'));var s=getSelection();s.removeAllRanges();s.addRange(r);$('copy').textContent='已選取，請長按複製'}
+
+$('booking-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(!$('txt').textContent.trim()){
+    $('err').textContent='請先產生預約訊息。';
+    return;
+  }
+  $('err').textContent='';
+  var form = $('booking-form');
+  var data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: {'Accept': 'application/json'}
+  }).then(function(response){
+    if(response.ok){
+      $('err').style.color='#1b8f5a';
+      $('err').textContent='提交成功，已寄送到信箱。';
+      $('send').textContent='已送出';
+      $('send').disabled=true;
+    } else {
+      $('err').style.color='#b3392e';
+      $('err').textContent='送出失敗，請確認 Formspree ID 是否正確。';
+    }
+  }).catch(function(){
+    $('err').style.color='#b3392e';
+    $('err').textContent='送出失敗，請確認 Formspree 連線或表單設定。';
+  });
+});
 </script>
 </body>
 </html>
