@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>付費約拍預約</title>
+<style>
+:root{--bg:#f3e3e8;--card:#fffafb;--in:#fff;--sel:#f4ecee;--fg:#4a3540;--mut:#a38a95;--ac:#de7fa3;--ac2:#c25c85;--line:#f0d6df;--box:#fbf1f4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1e1519;--card:#2b1f25;--in:#21181c;--sel:#3a2b33;--fg:#f6e6ec;--mut:#b49aa5;--ac:#de7fa3;--ac2:#eba0bc;--line:#45333c;--box:#34262d}}
+:root[data-theme="dark"]{--bg:#1e1519;--card:#2b1f25;--in:#21181c;--sel:#3a2b33;--fg:#f6e6ec;--mut:#b49aa5;--ac:#de7fa3;--ac2:#eba0bc;--line:#45333c;--box:#34262d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
+.card{max-width:520px;margin:18px auto;background:var(--card);border-radius:36px;padding:30px 22px 30px}
+.hd{background:var(--ac);color:#fff;border-radius:20px;text-align:center;padding:18px 10px;font-size:24px;letter-spacing:.08em;font-weight:600}
+.tip{text-align:center;color:var(--mut);font-size:14px;margin:12px 0 4px}
+label.f{display:block;font-weight:600;margin:22px 0 8px}
+input[type=text],input[type=date],select,textarea{width:100%;box-sizing:border-box;font:inherit;color:var(--fg);background:var(--in);border:1.5px solid var(--line);border-radius:22px;padding:15px 20px}
+select{background-color:var(--sel);appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 24px) 55%,calc(100% - 18px) 55%;background-size:6px 6px;background-repeat:no-repeat}
+input[type=date]{min-width:0;max-width:100%;-webkit-appearance:none;appearance:none;min-height:56px;text-align:left}
+textarea{min-height:96px;resize:vertical}
+.h{color:var(--mut);font-size:14px;margin:6px 0 0}
+.chk{display:flex;gap:12px;align-items:flex-start;margin:15px 0 0;font-size:16px}
+.chk input{appearance:none;-webkit-appearance:none;flex:none;width:26px;height:26px;margin:2px 0 0;border:2px solid var(--ac);border-radius:8px;background:var(--in)}
+.chk input:checked{background:var(--ac) center/16px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.total{background:var(--box);border:1px solid var(--line);border-radius:26px;text-align:center;padding:22px 16px;margin-top:28px}
+.total small{display:block;color:var(--mut);font-weight:700;font-size:18px}
+.total strong{display:block;font-size:34px;color:var(--ac2);margin-top:8px}
+.total p{margin:6px 0 0;font-size:13px;color:var(--mut)}
+.notes{margin-top:24px;background:var(--box);border:1.5px dashed var(--ac);border-radius:26px;padding:20px 22px}
+.notes h3{margin:0 0 8px;font-size:18px}
+.notes p{margin:8px 0;font-size:15px;color:var(--mut)}
+details{margin-top:24px;background:var(--box);border:1.5px solid var(--line);border-radius:26px;padding:6px 22px}
+summary{font-weight:700;font-size:18px;padding:14px 0;cursor:pointer}
+.ct p{margin:0 0 12px;font-size:15px;color:var(--mut)}
+.ct b{color:var(--fg)}
+button{width:100%;font:inherit;font-weight:700;font-size:20px;letter-spacing:.2em;color:#fff;background:var(--ac);border:0;border-radius:32px;padding:20px;margin-top:26px;box-shadow:0 8px 18px rgba(222,127,163,.3)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ac2);outline-offset:2px}
+#err{color:#b3392e;font-size:15px;margin-top:14px;text-align:center;min-height:20px}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--in);border:1.5px solid var(--line);border-radius:22px;padding:16px;font:inherit;font-size:15px;margin:26px 0 0}
+</style>
+</head>
+<body>
+<div class="card">
+  <noscript><p class="tip" style="color:#b3392e">此檔案需用瀏覽器（Safari／Chrome）開啟，才能自動計算費用與產生訊息。</p></noscript>
+  <div class="hd">付費約拍 預約表單</div>
+  <p class="tip">填完產生訊息，複製後私訊 IG 即可</p>
+
+  <label class="f" for="nick">👤 稱呼</label>
+  <input type="text" id="nick" placeholder="請輸入稱呼">
+
+  <label class="f" for="cp">📱 聯絡方式</label>
+  <select id="cp"><option>IG</option><option>Twitter（X）</option><option>微信</option></select>
+  <input type="text" id="ig" placeholder="請輸入帳號或 ID" style="margin-top:10px">
+
+  <label class="f" for="type">👗 拍攝類型</label>
+  <select id="type">
+    <option value="1500">一般時裝（無露溝、露腿、露腰）</option>
+    <option value="2000">性感時裝</option>
+    <option value="3000">一般內衣／泳衣／比基尼（非丁字款）</option>
+    <option value="4000">性感內衣（馬甲、蕾絲、法式）</option>
+  </select>
+  <p class="h">拍攝時間 3 小時，價格為單人</p>
+
+  <label class="f" for="date">📅 希望日期</label>
+  <input type="date" id="date">
+  <p class="h">若可配合對方檔期，南部約拍免車馬費</p>
+
+  <label class="f" for="time">🕑 希望時段</label>
+  <input type="text" id="time" placeholder="例如 下午 14:00 開始">
+
+  <label class="f" for="area">📍 拍攝地區</label>
+  <select id="area">
+    <option>高雄</option>
+    <option>北部（車馬費實報實銷）</option>
+    <option>中部（車馬費實報實銷）</option>
+  </select>
+
+  <label class="f" for="place">🏠 預計拍攝場地</label>
+  <input type="text" id="place" placeholder="例如 攝影棚／戶外／咖啡廳">
+
+  <label class="f" for="idea">🎨 主題與風格構想</label>
+  <textarea id="idea" placeholder="想拍的風格、服裝、參考方向"></textarea>
+  <p class="h">特別想拍的動作請先準備示意圖</p>
+
+  <label class="f" for="first">🤝 是否初次合作</label>
+  <select id="first"><option>是，初次合作</option><option>否，合作過</option></select>
+  <p class="h">初次一對一合作不接受旅拍</p>
+
+  <label class="f" for="use">🖼️ 作品用途</label>
+  <select id="use"><option>個人收藏</option><option>社群發表</option><option>其他（備註說明）</option></select>
+  <p class="h">未經允許的作品不可上架電子寫真</p>
+
+  <label class="f" for="msg">✍️ 備註（選填）</label>
+  <input type="text" id="msg">
+
+  <div class="total"><small>預估拍攝費用</small><strong id="sum">$1,500</strong><p id="sumn">單人、3 小時；不含車馬費</p></div>
+
+  <div class="notes">
+    <h3>注意事項</h3>
+    <p>不接受情趣、裸拍；拍攝時不接受肢體碰觸、凹尺度。</p>
+    <p>拍攝都會攜伴，人頭費由模特方自行處理。</p>
+    <p>有付費的攝影才可參與拍攝（含手機）。</p>
+    <p>不可刻意拍特寫私密部位或走光角度。</p>
+    <p>天氣因素需更改時間地點，請提前 2 天告知。</p>
+  </div>
+
+  <details open>
+    <summary>📄 拍攝合約書（保障雙方）</summary>
+    <div class="ct">
+      <p>拍攝會簽訂合約書，內容如下：</p>
+      <p><b>第一條　拍攝範圍限制</b><br>攝影不得拍攝約定外之影像；若現場有臨時異動需求，須經雙方當場同意後方得進行。</p>
+      <p><b>第二條　照片交付優惠</b><br>攝影師於拍攝完成後 30 個工作天內完成照片／影片之挑選與交付，可享有 $500 元優惠。</p>
+      <p><b>第三條　後製與影像保護</b><br>除原片剪輯與修圖外，雙方皆不得使用其他後製軟體擅自更改內容成像（如使用 AI 換臉、變造，或作為其他非授權之不當用途）。</p>
+      <p><b>第四條　隱私與安全</b><br>雙方對於拍攝過程及內容均負有保密義務，不得任意流出未公開之毛片，以維護彼此隱私與聲譽。</p>
+      <p><b>第五條　違約處理</b><br>若任一方違反本合約之約定，守約方得請求違約方改善；若情節重大導致權益受損者，守約方得終止合約並依法請求相關損害賠償。</p>
+    </div>
+  </details>
+
+  <label class="chk"><input type="checkbox" id="disc"><span>我會在拍攝後 30 個工作天內完成挑選與交付（享 $500 優惠）</span></label>
+  <p class="h" style="margin:6px 0 0 38px">※ 選填，可自行決定要不要勾選；不勾選就不享有優惠，也不影響預約。</p>
+
+  <label class="chk"><input type="checkbox" class="ck"><span>我了解並同意以上注意事項與收費標準</span></label>
+  <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝期間尊重對方，不碰觸、不凹尺度</span></label>
+  <label class="chk"><input type="checkbox" class="ck"><span>我同意作品未經允許不上架電子寫真</span></label>
+  <label class="chk"><input type="checkbox" class="ck"><span>我同意拍攝當天簽訂合約書，並遵守以上條款</span></label>
+
+  <div id="err" role="alert"></div>
+  <button id="go" type="button">產生預約訊息</button>
+  <div id="out" hidden><pre id="txt"></pre><button id="copy" type="button">複製訊息</button></div>
+</div>
+<script>
+var $=function(i){return $_(i)};function $_(i){return document.getElementById(i)}
+function price(){return Math.max(0,(+$('type').value)-($('disc').checked?500:0))}
+function upd(){$('sum').textContent='$'+price().toLocaleString()}
+$('type').addEventListener('change',upd);$('disc').addEventListener('change',upd);upd();
+function st(i){var o=$(i);return o.options[o.selectedIndex].text}
+$('go').onclick=function(){
+  var all=true;document.querySelectorAll('.ck').forEach(function(c){if(!c.checked)all=false});
+  if(!$('idea').value.trim()){$('err').textContent='請填寫主題與風格構想。';return}
+  if(!all){$('err').textContent='請勾選所有同意事項。';return}
+  $('err').textContent='';
+  var v=function(i){return $(i).value.trim()||'—'};
+  var t='【付費約拍預約】\n稱呼：'+v('nick')+'\n聯絡方式：'+st('cp')+' '+v('ig')+'\n\n'+
+  '拍攝類型：'+st('type')+'\n預估費用：$'+price().toLocaleString()+'（單人、3 小時'+($('disc').checked?'，含 30 工作天交付優惠 $500':'')+'）\n\n'+
+  '希望日期：'+v('date')+'\n希望時段：'+v('time')+'\n拍攝地區：'+st('area')+'\n預計場地：'+v('place')+'\n\n'+
+  '主題與風格：'+$('idea').value.trim()+'\n初次合作：'+st('first')+'\n作品用途：'+st('use')+'\n備註：'+v('msg')+'\n\n'+
+  '我已了解並同意注意事項與收費標準，並同意拍攝當天簽訂合約書。';
+  $('txt').textContent=t;$('out').hidden=false;$('out').scrollIntoView({behavior:'smooth'});
+};
+$('copy').onclick=function(){
+  var t=$('txt').textContent;
+  try{navigator.clipboard.writeText(t).then(function(){$('copy').textContent='已複製'},sel)}catch(e){sel()}
+};
+function sel(){var r=document.createRange();r.selectNodeContents($('txt'));var s=getSelection();s.removeAllRanges();s.addRange(r);$('copy').textContent='已選取，請長按複製'}
+</script>
+</body>
+</html>
